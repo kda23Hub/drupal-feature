@@ -1,0 +1,49 @@
+# This file defines patterns for files and directories that should be ignored
+# by Git in a Drupal 10 project. This helps to prevent sensitive information
+# and user-uploaded files from being committed to the repository.
+#
+# Ignore the Drupal core directory when managing all project dependencies with Composer.
+# This includes core files and directories.
+web/core/
+
+# Ignore Composer-managed dependencies.
+# Only the root vendor directory should be ignored. Core/assets/vendor
+# and other vendor directories in contrib or custom modules/themes
+# should not be ignored unless intended.
+vendor/
+web/modules/contrib/
+web/themes/contrib/
+
+# Ignore configuration files that may contain sensitive information.
+web/sites/*/settings*.php
+web/sites/*/services*.yml
+
+# Ignore paths that contain user-generated content.
+web/sites/*/files
+web/sites/*/private
+
+# Ignore the multi-site test environment.
+web/sites/simpletest
+
+# If you prefer to store your .gitignore file in the sites/ folder,
+# you can comment out the above lines and uncomment the following ones.
+
+# Ignore configuration files that may contain sensitive information.
+*/settings*.php
+
+# Ignore paths that contain user-generated content.
+*/files
+*/private
+
+# Ignore multi-site test environment.
+# simpletest
+
+# Ignore development and IDE files.
+.docksal/
+.idea/
+.DS_Store
+
+# Ignore any local development configuration files.
+local.settings.php
+*.local.yml
+
