@@ -1,0 +1,5 @@
+name: 'Dynamic Toolkit'
+type: module
+description: 'Custom Module for Test Tasks'
+package: Custom
+core_version_requirement: ^10 || ^11
