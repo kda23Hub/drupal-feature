@@ -15,13 +15,6 @@ function dynamic_toolkit_theme() {
 }
 
 /**
- * @file
- * Primary module hooks for Dynamic Toolkit module.
- */
-
-use Drupal\Core\Session\AccountInterface;
-
-/**
  * Implements hook_permission().
  */
 function dynamic_toolkit_permission() {

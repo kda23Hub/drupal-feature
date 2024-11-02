@@ -16,7 +16,7 @@
 
 .node-listing-block tbody tr {
   transition: background-color 0.3s ease;
-  border: 1px solid #dee2e6; /* Add border to rows */
+  border: 1px solid #dee2e6;
 }
 
 .node-listing-block tbody tr:hover {
@@ -27,5 +27,11 @@
   padding: 15px;
   text-align: left;
   color: #343a40;
-  border: 1px solid #dee2e6; /* Add border to cells */
+  border: 1px solid #dee2e6;
+}
+
+.block-title {
+  text-align: center;
+  font-size: 28px;
+  color: #000;
 }

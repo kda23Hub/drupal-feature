@@ -6,14 +6,13 @@ use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Database\Connection;
-use Drupal\node\Entity\NodeType;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 
 
 /**
- * Provides a 'NodeListing' block.
+ * Provides a custom 'NodeListing' block that lists published nodes by type.
  *
  * @Block(
  *  id = "node_listing_block",
@@ -22,7 +21,18 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
  */
 class NodeListingBlock extends BlockBase implements ContainerFactoryPluginInterface {
 
+  /**
+   * Database connection service.
+   *
+   * @var \Drupal\Core\Database\Connection
+   */
   protected $database;
+
+  /**
+   * Entity type manager service.
+   *
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   */
   protected $entityTypeManager;
 
 
@@ -61,26 +71,37 @@ class NodeListingBlock extends BlockBase implements ContainerFactoryPluginInterf
   }
 
   /**
-   * {@inheritdoc}
+   * Builds the node listing block content.
+   *
+   * @return array
+   *   Render array for the block content.
    */
   public function build() {
     $node_types = $this->entityTypeManager->getStorage('node_type')->loadMultiple();
     $rows = [];
 
-    foreach ($node_types as $node_type) {
-      $nids = $this->entityTypeManager->getStorage('node')
-        ->getQuery()
-        ->condition('type', $node_type->id())
-        ->condition('status', 1)
-        ->accessCheck(TRUE)
-        ->execute();
+    if (!empty($node_types)) {
+      foreach ($node_types as $node_type) {
+        if ($this->entityTypeManager->getStorage('node')) {
+          // Query to retrieve published nodes of the current type.
+          $nids = $this->entityTypeManager->getStorage('node')
+            ->getQuery()
+            ->condition('type', $node_type->id())
+            ->condition('status', 1)
+            ->accessCheck(TRUE)
+            ->execute();
 
-      $nodes = $this->entityTypeManager->getStorage('node')->loadMultiple($nids);
-      foreach ($nodes as $node) {
-        $rows[] = [
-          'title' => $node->getTitle(),
-          'type' => $node_type->label(),
-        ];
+          // Load node entities and prepare data for rendering.
+          if (!empty($nids)) {
+            $nodes = $this->entityTypeManager->getStorage('node')->loadMultiple($nids);
+            foreach ($nodes as $node) {
+              $rows[] = [
+                'title' => $node->getTitle(),
+                'type' => $node_type->label(),
+              ];
+            }
+          }
+        }
       }
     }
 
@@ -95,7 +116,13 @@ class NodeListingBlock extends BlockBase implements ContainerFactoryPluginInterf
   }
 
   /**
-   * {@inheritdoc}
+   * Controls access to the block based on user permissions.
+   *
+   * @param \Drupal\Core\Session\AccountInterface $account
+   *   The user account object.
+   *
+   * @return \Drupal\Core\Access\AccessResult
+   *    The access result.
    */
   protected function blockAccess(AccountInterface $account) {
     if ($account->hasPermission('view node listing block')) {
