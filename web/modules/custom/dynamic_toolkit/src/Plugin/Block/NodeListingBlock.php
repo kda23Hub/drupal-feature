@@ -77,6 +77,7 @@ class NodeListingBlock extends BlockBase implements ContainerFactoryPluginInterf
    *   Render array for the block content.
    */
   public function build() {
+    $total_limit = 15;
     $node_types = $this->entityTypeManager->getStorage('node_type')->loadMultiple();
     $rows = [];
 
@@ -99,6 +100,11 @@ class NodeListingBlock extends BlockBase implements ContainerFactoryPluginInterf
                 'title' => $node->getTitle(),
                 'type' => $node_type->label(),
               ];
+
+              // Break the loop if we have reached the total limit of nodes.
+              if (count($rows) >= $total_limit) {
+                break 2;
+              }
             }
           }
         }
