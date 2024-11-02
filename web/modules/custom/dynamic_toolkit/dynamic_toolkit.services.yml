@@ -1,0 +1,4 @@
+services:
+  dynamic_toolkit.custom_user_node_service:
+    class: Drupal\dynamic_toolkit\CustomUserNodeService
+    arguments: ['@current_route_match', '@entity_type.manager']
