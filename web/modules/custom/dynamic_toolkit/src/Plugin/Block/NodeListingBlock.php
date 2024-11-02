@@ -2,14 +2,13 @@
 
 namespace Drupal\dynamic_toolkit\Plugin\Block;
 
-use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Access\AccessResult;
-use Drupal\Core\Session\AccountInterface;
+use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Database\Connection;
-use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
-
+use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Drupal\Core\Session\AccountInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Provides a custom 'NodeListing' block that lists published nodes by type.
@@ -35,7 +34,6 @@ class NodeListingBlock extends BlockBase implements ContainerFactoryPluginInterf
    */
   protected $entityTypeManager;
 
-
   /**
    * Constructs a new NodeListingBlock instance.
    *
@@ -47,7 +45,7 @@ class NodeListingBlock extends BlockBase implements ContainerFactoryPluginInterf
    *   The plugin definition.
    * @param \Drupal\Core\Database\Connection $database
    *   The database connection.
-   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
    *   The entity type manager.
    */
   public function __construct(array $configuration, $plugin_id, $plugin_definition, Connection $database, EntityTypeManagerInterface $entityTypeManager) {
@@ -55,7 +53,6 @@ class NodeListingBlock extends BlockBase implements ContainerFactoryPluginInterf
     $this->database = $database;
     $this->entityTypeManager = $entityTypeManager;
   }
-
 
   /**
    * {@inheritdoc}
@@ -128,7 +125,7 @@ class NodeListingBlock extends BlockBase implements ContainerFactoryPluginInterf
    *   The user account object.
    *
    * @return \Drupal\Core\Access\AccessResult
-   *    The access result.
+   *   The access result.
    */
   protected function blockAccess(AccountInterface $account) {
     if ($account->hasPermission('view node listing block')) {
@@ -136,4 +133,5 @@ class NodeListingBlock extends BlockBase implements ContainerFactoryPluginInterf
     }
     return AccessResult::forbidden();
   }
+
 }
