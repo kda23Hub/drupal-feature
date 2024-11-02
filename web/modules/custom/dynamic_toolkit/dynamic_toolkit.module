@@ -1,4 +1,18 @@
 <?php
+/**
+ * Implements hook_theme().
+ */
+function dynamic_toolkit_theme() {
+  return [
+    'node_listing' => [
+      'variables' => [
+        'nodes' => [],
+        'empty' => '',
+      ],
+      'template' => 'node-listing-block',
+    ],
+  ];
+}
 
 /**
  * @file

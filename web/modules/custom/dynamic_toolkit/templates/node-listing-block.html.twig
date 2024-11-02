@@ -1,0 +1,25 @@
+<div class="node-listing-block">
+  <h2 class="block-title" style="text-align: center; font-size: 28px; color: #000;">Node Listing Block</h2>
+  {% if nodes %}
+    <div class="table-responsive">
+      <table class="table">
+      <thead>
+        <tr>
+          <th>{{ 'Title'|t }}</th>
+          <th>{{ 'Type'|t }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for node in nodes %}
+          <tr>
+            <td>{{ node.title }}</td>
+            <td>{{ node.type }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+      </table>
+    </div>
+  {% else %}
+    {{ empty }}
+  {% endif %}
+</div>

@@ -76,7 +76,6 @@ class NodeListingBlock extends BlockBase implements ContainerFactoryPluginInterf
         ->execute();
 
       $nodes = $this->entityTypeManager->getStorage('node')->loadMultiple($nids);
-
       foreach ($nodes as $node) {
         $rows[] = [
           'title' => $node->getTitle(),
@@ -85,18 +84,11 @@ class NodeListingBlock extends BlockBase implements ContainerFactoryPluginInterf
       }
     }
 
-    $header = [
-      'title' => $this->t('Title'),
-      'type' => $this->t('Type'),
-    ];
-
-    $build['table'] = [
-      '#type' => 'table',
-      '#header' => $header,
-      '#rows' => $rows,
+    $build['content'] = [
+      '#theme' => 'node_listing',
+      '#nodes' => $rows,
       '#empty' => $this->t('No content available.'),
-      '#attributes' => ['class' => ['node-listing-block']],
-      '#attached' => ['library' => ['dynamic_toolkit/node_listing_block']],
+      '#attached' => ['library' => ['dynamic_toolkit/dynamic_toolkit_node_listing']],
     ];
 
     return $build;

@@ -1,0 +1,7 @@
+dynamic_toolkit_node_listing:
+  version: 1.x
+  css:
+    theme:
+      css/node_listing.css: {}
+  dependencies:
+    - core/drupal
