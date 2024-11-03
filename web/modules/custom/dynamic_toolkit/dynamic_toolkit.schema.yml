@@ -1,0 +1,12 @@
+dynamic_toolkit.custom_entity.*:
+  type: config_entity
+  label: 'Custom Entity config'
+  mapping:
+    id:
+      type: string
+      label: 'ID'
+    label:
+      type: label
+      label: 'Label'
+    uuid:
+      type: string
