@@ -2,10 +2,12 @@
 
 namespace Drupal\dynamic_toolkit;
 
-use Drupal\Core\Routing\CurrentRouteMatch;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\Core\Routing\CurrentRouteMatch;
 
+/**
+ * Provides a service to fetch user and node information from the current route.
+ */
 class CustomUserNodeService {
 
   /**
@@ -46,7 +48,7 @@ class CustomUserNodeService {
     if ($user) {
       return $user->getDisplayName();
     }
-    return null;
+    return NULL;
   }
 
   /**
@@ -60,6 +62,7 @@ class CustomUserNodeService {
     if ($node) {
       return $node->getTitle();
     }
-    return null;
+    return NULL;
   }
+
 }
