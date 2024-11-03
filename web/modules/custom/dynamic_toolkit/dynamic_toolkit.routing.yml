@@ -1,0 +1,11 @@
+entity.user.canonical:
+  path: '/user/{user}'
+  defaults:
+    _entity_view: 'user'
+    _title: 'User profile'
+  requirements:
+    _custom_access: 'dynamic_toolkit.access_check.user_privacy:access'
+  options:
+    parameters:
+      user:
+        type: 'entity:user'

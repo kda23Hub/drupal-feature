@@ -2,3 +2,9 @@ services:
   dynamic_toolkit.custom_user_node_service:
     class: Drupal\dynamic_toolkit\CustomUserNodeService
     arguments: ['@current_route_match', '@entity_type.manager']
+
+  dynamic_toolkit.access_check.user_privacy:
+    class: Drupal\dynamic_toolkit\Access\UserPrivacyAccessCheck
+    arguments: ['@current_user', '@entity_type.manager']
+    tags:
+      - { name: access_check }
