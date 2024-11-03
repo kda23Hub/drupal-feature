@@ -1,0 +1,27 @@
+uuid: 80317a9e-2b42-41a7-bb7a-3b7e51c84de6
+langcode: en-gb
+status: true
+dependencies:
+  module:
+    - options
+    - user
+id: user.field_privacy_option
+field_name: field_privacy_option
+entity_type: user
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: keep_private
+      label: 'Keep private'
+    -
+      value: no_restriction
+      label: 'No restriction'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

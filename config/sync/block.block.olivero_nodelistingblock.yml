@@ -1,0 +1,20 @@
+uuid: ba86c78a-4528-499c-823d-317fde389eab
+langcode: en-gb
+status: true
+dependencies:
+  module:
+    - dynamic_toolkit
+  theme:
+    - olivero
+id: olivero_nodelistingblock
+theme: olivero
+region: content
+weight: 0
+provider: null
+plugin: node_listing_block
+settings:
+  id: node_listing_block
+  label: Task-1
+  label_display: visible
+  provider: dynamic_toolkit
+visibility: {  }

@@ -1,0 +1,23 @@
+uuid: b01c5723-2ef3-4b3e-9eb5-3f1cb34eb0bc
+langcode: en-gb
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_privacy_option
+  module:
+    - options
+    - user
+id: user.user.field_privacy_option
+field_name: field_privacy_option
+entity_type: user
+bundle: user
+label: 'Privacy option'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: no_restriction
+default_value_callback: ''
+settings: {  }
+field_type: list_string
