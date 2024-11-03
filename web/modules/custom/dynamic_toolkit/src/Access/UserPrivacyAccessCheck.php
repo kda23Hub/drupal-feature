@@ -4,10 +4,10 @@ namespace Drupal\dynamic_toolkit\Access;
 
 use Drupal\Core\Access\AccessCheckInterface;
 use Drupal\Core\Access\AccessResult;
-use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Symfony\Component\Routing\Route;
+use Drupal\Core\Session\AccountInterface;
 use Drupal\user\UserInterface;
+use Symfony\Component\Routing\Route;
 
 /**
  * Provides a custom access check for user privacy settings.
@@ -65,21 +65,23 @@ class UserPrivacyAccessCheck implements AccessCheckInterface {
    * @return \Drupal\Core\Access\AccessResultInterface
    *   The access result.
    */
-  public function access(AccountInterface $account, UserInterface $user = NULL) {
+  public function access(AccountInterface $account, ?UserInterface $user = NULL) {
+    // Deny anonymous users.
     if ($account->isAnonymous()) {
       return AccessResult::forbidden();
     }
 
-    // Allow access for superadmin (user ID 1).
+    // Allow superadmin.
     if ($account->id() == 1) {
       return AccessResult::allowed();
     }
 
+    // Deny if target user is missing.
     if (!$user) {
       return AccessResult::forbidden();
     }
 
-    // Check the privacy setting.
+    // Deny if profile is private and viewer is not the owner.
     $privacy_option = $user->get('field_privacy_option')->value;
     if ($privacy_option === 'keep_private' && $account->id() != $user->id()) {
       return AccessResult::forbidden();
@@ -87,4 +89,5 @@ class UserPrivacyAccessCheck implements AccessCheckInterface {
 
     return AccessResult::allowed();
   }
+
 }
