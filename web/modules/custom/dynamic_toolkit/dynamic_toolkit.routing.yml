@@ -17,3 +17,11 @@ dynamic_toolkit.custom_entity_form:
     _title: 'Add Custom Entity'
   requirements:
     _permission: 'add custom entity'
+
+entity.custom_entity.collection:
+  path: '/admin/content/custom-entity'
+  defaults:
+    _entity_list: 'custom_entity'
+    _title: 'Custom Entities'
+  requirements:
+    _permission: 'view custom entity'
