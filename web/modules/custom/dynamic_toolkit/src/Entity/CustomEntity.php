@@ -58,7 +58,7 @@ class CustomEntity extends ContentEntityBase implements ContentEntityInterface {
   public static function baseFieldDefinitions(EntityTypeInterface $entity_type) {
     $fields = parent::baseFieldDefinitions($entity_type);
 
-    $fields['id'] = BaseFieldDefinition::create('integer')
+    $fields['id'] = BaseFieldDefinition::create('string')
       ->setLabel(t('ID'))
       ->setDescription(t('The ID of the Custom entity.'))
       ->setReadOnly(TRUE)
@@ -76,7 +76,7 @@ class CustomEntity extends ContentEntityBase implements ContentEntityInterface {
         'max_length' => 255,
         'text_processing' => 0,
       ])
-      ->setDefaultValue('')
+      ->setDefaultValue('Default')
       ->setDisplayOptions('view', [
         'label' => 'hidden',
         'type' => 'string',
@@ -95,7 +95,7 @@ class CustomEntity extends ContentEntityBase implements ContentEntityInterface {
       ->setSetting('target_type', 'node')
       ->setSetting('handler', 'default:node')
       ->setSetting('handler_settings', [
-        'target_bundles' => ['basic_page' => 'basic_page'],
+        'target_bundles' => ['page' => 'page'],
       ])
       ->setDisplayOptions('view', [
         'label' => 'hidden',

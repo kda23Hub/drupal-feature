@@ -33,7 +33,7 @@ class CustomEntityForm extends ContentEntityForm {
       '#title' => $this->t('Referenced Node'),
       '#target_type' => 'node',
       '#selection_settings' => [
-        'target_bundles' => ['basic_page' => 'basic_page'],
+        'target_bundles' => ['page' => 'page'],
       ],
       '#required' => TRUE,
     ];
@@ -58,6 +58,9 @@ class CustomEntityForm extends ContentEntityForm {
     $entity = $this->entity;
     $status = $entity->save();
 
+    // Add null check for label
+    $label = $entity->label() ?? $this->t('Default');
+
     if ($status) {
       $this->messenger()->addMessage($this->t('Saved the %label Custom entity.', [
         '%label' => $entity->label(),
@@ -80,7 +83,7 @@ class CustomEntityForm extends ContentEntityForm {
     $values = $form_state->getValues();
 
     $entity = \Drupal::entityTypeManager()->getStorage('custom_entity')->create([
-      'label' => $values['label'],
+      'label' => $values['label'] ?? $this->t('Default'), // Add null check for label if NULL
       'field_reference_node' => $values['field_reference_node'],
     ]);
 
