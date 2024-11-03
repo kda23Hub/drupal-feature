@@ -9,3 +9,11 @@ entity.user.canonical:
     parameters:
       user:
         type: 'entity:user'
+
+dynamic_toolkit.custom_entity_form:
+  path: '/custom-entity/add'
+  defaults:
+    _entity_form: 'custom_entity.add'
+    _title: 'Add Custom Entity'
+  requirements:
+    _permission: 'add custom entity'
