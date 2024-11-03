@@ -26,3 +26,12 @@ function dynamic_toolkit_permission() {
     ],
   ];
 }
+
+/**
+ * Implements hook_update_N().
+ */
+function dynamic_toolkit_update_8101() {
+  \Drupal::entityDefinitionUpdateManager()->installEntityType(
+    \Drupal::entityTypeManager()->getDefinition('custom_entity')
+  );
+}
