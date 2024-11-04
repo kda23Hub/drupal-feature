@@ -6,7 +6,7 @@ use Drupal\Core\Entity\ContentEntityForm;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * Form controller for Custom entity edit and add forms.
+ * Form controller for the Custom entity add/edit forms.
  */
 class CustomEntityForm extends ContentEntityForm {
 
@@ -48,7 +48,6 @@ class CustomEntityForm extends ContentEntityForm {
     return parent::buildForm($form, $form_state);
   }
 
-
   /**
    * Saves the custom entity after submission.
    *
@@ -58,14 +57,15 @@ class CustomEntityForm extends ContentEntityForm {
     $entity = $this->entity;
     $status = $entity->save();
 
-    // Add null check for label
+    // Add null check for label.
     $label = $entity->label() ?? $this->t('Default');
 
     if ($status) {
       $this->messenger()->addMessage($this->t('Saved the %label Custom entity.', [
         '%label' => $entity->label(),
       ]));
-    } else {
+    }
+    else {
       $this->messenger()->addMessage($this->t('The %label Custom entity was not saved.', [
         '%label' => $entity->label(),
       ]));
@@ -83,7 +83,8 @@ class CustomEntityForm extends ContentEntityForm {
     $values = $form_state->getValues();
 
     $entity = \Drupal::entityTypeManager()->getStorage('custom_entity')->create([
-      'label' => $values['label'] ?? $this->t('Default'), // Add null check for label if NULL
+      // Add null check for label if NULL.
+      'label' => $values['label'] ?? $this->t('Default'),
       'field_reference_node' => $values['field_reference_node'],
     ]);
 
@@ -93,4 +94,5 @@ class CustomEntityForm extends ContentEntityForm {
 
     $form_state->setRedirect('<front>');
   }
+
 }

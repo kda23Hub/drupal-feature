@@ -4,14 +4,19 @@ namespace Drupal\dynamic_toolkit;
 
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityListBuilder;
-use Drupal\Core\Link;
 
 /**
  * Defines a list builder for Custom entities.
+ *
+ * This class is unused as the custom entity list is displayed by
+ * view, but serves as a fallback if the view is unavailable, not
+ * configured correctly, flexibility and extensibility.
  */
 class CustomEntityListBuilder extends EntityListBuilder {
 
   /**
+   * Builds the header for the entity list table.
+   *
    * {@inheritdoc}
    */
   public function buildHeader() {
@@ -21,6 +26,8 @@ class CustomEntityListBuilder extends EntityListBuilder {
   }
 
   /**
+   * Builds a row in the entity list table.
+   *
    * {@inheritdoc}
    */
   public function buildRow(EntityInterface $entity) {
@@ -28,4 +35,5 @@ class CustomEntityListBuilder extends EntityListBuilder {
     $row['id'] = $entity->id();
     return $row + parent::buildRow($entity);
   }
+
 }
