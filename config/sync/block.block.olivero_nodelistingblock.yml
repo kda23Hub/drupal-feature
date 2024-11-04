@@ -4,12 +4,13 @@ status: true
 dependencies:
   module:
     - dynamic_toolkit
+    - system
   theme:
     - olivero
 id: olivero_nodelistingblock
 theme: olivero
 region: content
-weight: 0
+weight: -7
 provider: null
 plugin: node_listing_block
 settings:
@@ -17,4 +18,8 @@ settings:
   label: Task-1
   label_display: visible
   provider: dynamic_toolkit
-visibility: {  }
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: '<front>'
